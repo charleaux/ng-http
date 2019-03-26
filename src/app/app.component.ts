@@ -7,6 +7,7 @@ import { ServerService } from './server.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  appName = this.serverService.getAppName();
   servers = [
     {
       name: 'Testserver',
@@ -41,11 +42,11 @@ export class AppComponent {
     );
   }
   onGet() {
-    this.serverService.getServers().subscribe(
-      (servers: any[]) => {
-        console.log(servers);
-      },
-      error => console.log(error)
-    );
+    this.serverService
+      .getServers()
+      .subscribe(
+        (servers: any[]) => (this.servers = servers),
+        error => console.log(error)
+      );
   }
 }
